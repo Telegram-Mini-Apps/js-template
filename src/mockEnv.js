@@ -1,7 +1,7 @@
 import { mockTelegramEnv, parseInitData, retrieveLaunchParams } from '@telegram-apps/sdk';
 
 export function mockEnv() {
-  let shouldMock: boolean;
+  let shouldMock;
 
   // Try to extract launch parameters to check if the current environment is Telegram-based.
   try {

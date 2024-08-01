@@ -1,27 +1,27 @@
 import $ from 'jquery';
-import { WalletInfoBase } from '@tonconnect/ui';
 import { classNames } from '@telegram-apps/sdk';
 
 import { Link } from '@/components/Link/Link';
-import { AppContext } from '@/context/types';
 
 import './styles.css';
 
 export class WalletProvider {
-  private context: AppContext;
-  private readonly el: JQuery<HTMLDivElement>;
-  private readonly img: JQuery<HTMLImageElement>;
-
-  constructor({ context, class: className }: { context: AppContext, class?: string }) {
+  /**
+   * @param {{ context: import('../../context/types').AppContext, class?: string }} 
+   */
+  constructor({ context, class: className }) {
     this.context = context;
-    this.img = $<HTMLImageElement>('<img class="wallet-provider__image" height="60" width="60">')
+    this.img = $('<img class="wallet-provider__image" height="60" width="60">')
       .attr('alt', 'Provider logo');
-    this.el = $<HTMLDivElement>('<div/>')
+    this.el = $('<div/>')
       .attr('class', classNames(className, 'wallet-provider'))
       .attr('style', 'display: none;');
   }
 
-  setWallet(wallet: WalletInfoBase | null): void {
+  /**
+   * @param {import('@tonconnect/ui').WalletInfoBase | null} wallet 
+   */
+  setWallet(wallet) {
     if (!wallet) {
       this.el.attr('style', 'display: none;');
       this.el.empty();
@@ -41,6 +41,9 @@ export class WalletProvider {
     }
   }
 
+  /**
+   * @returns {HTMLDivElement}
+   */
   element() {
     return this.el[0];
   }

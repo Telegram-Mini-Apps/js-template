@@ -2,15 +2,19 @@ import $ from 'jquery';
 import { classNames } from '@telegram-apps/sdk';
 
 export class TonConnectButton {
-  private readonly el: JQuery<HTMLDivElement>;
-
-  constructor({ id, class: className }: { id: string, class?: string }) {
-    this.el = $<HTMLDivElement>('<div/>')
+  /**
+   * @param {{ id: string, class?: string }}
+   */
+  constructor({ id, class: className }) {
+    this.el = $('<div/>')
       .attr('class', classNames(className))
       .append($('<div style="width: fit-content;"/>').attr('id', id));
   }
 
-  element(): HTMLDivElement {
+  /**
+   * @returns {HTMLDivElement}
+   */
+  element() {
     return this.el[0]
   }
 }

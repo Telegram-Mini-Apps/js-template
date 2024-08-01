@@ -1,13 +1,15 @@
 import $ from 'jquery';
-import type { User } from '@telegram-apps/sdk';
 
 import { Page } from '@/components/Page/Page';
 import { Link } from '@/components/Link/Link';
-import { DisplayData, type DisplayDataRow } from '@/components/DisplayData/DisplayData';
+import { DisplayData } from '@/components/DisplayData/DisplayData';
 import { PageComponent } from '@/pages/PageComponent';
-import type { AppContext } from '@/context/types';
 
-function getUserRows(user: User): DisplayDataRow[] {
+/**
+ * @param {Object} user 
+ * @returns {import('../../components/DisplayData/types').DisplayDataRow[]}
+ */
+function getUserRows(user) {
   return [
     { title: 'id', value: user.id.toString() },
     { title: 'username', value: user.username },
@@ -23,7 +25,10 @@ function getUserRows(user: User): DisplayDataRow[] {
 }
 
 export class InitDataPage extends PageComponent {
-  constructor(context: AppContext) {
+  /**
+   * @param {import('../../context/types').AppContext} context 
+   */
+  constructor(context) {
     super(new Page({ title: 'Init Data' }));
     const {
       launchParams: {
@@ -31,7 +36,7 @@ export class InitDataPage extends PageComponent {
       },
       initData,
     } = context;
-    const initDataRows: DisplayDataRow[] | undefined = initData && initDataRaw
+    const initDataRows = initData && initDataRaw
       ? [
         { title: 'raw', value: initDataRaw },
         { title: 'auth_date', value: initData.authDate.toLocaleString() },

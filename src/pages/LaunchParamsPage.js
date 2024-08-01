@@ -2,10 +2,12 @@ import { Page } from '@/components/Page/Page';
 import { Link } from '@/components/Link/Link';
 import { DisplayData } from '@/components/DisplayData/DisplayData';
 import { PageComponent } from '@/pages/PageComponent';
-import type { AppContext } from '@/context/types';
 
 export class LaunchParamsPage extends PageComponent {
-  constructor(context: AppContext) {
+  /**
+   * @param {import('../context/types').AppContext)} context 
+   */
+  constructor(context) {
     super(new Page({ title: 'Launch Params' }));
     const { launchParams: lp } = context;
     this

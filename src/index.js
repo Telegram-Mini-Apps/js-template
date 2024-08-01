@@ -6,11 +6,10 @@ import {
 } from '@telegram-apps/sdk';
 
 import { mockEnv } from '@/mockEnv.js';
-import { type RoutePage, routes } from '@/navigation/routes';
+import { routes } from '@/navigation/routes';
 import { initComponents } from '@/initComponents';
 import { initNavigator } from '@/initNavigator';
 import { initTonConnectUI } from '@/initTonConnectUI';
-import type { AppContext } from '@/context/types.js';
 
 import './index.css';
 
@@ -46,8 +45,8 @@ const {
 const navigator = await initNavigator();
 const tonConnectUI = initTonConnectUI();
 
-const root = document.getElementById('root')!;
-const appContext: AppContext = {
+const root = document.getElementById('root');
+const appContext = {
   initData,
   launchParams,
   miniApp,
@@ -57,7 +56,7 @@ const appContext: AppContext = {
   viewport,
   tonConnectUI,
 };
-let prevPage: RoutePage;
+let prevPage;
 
 function renderCurrentRoute() {
   const route = routes.find(r => r.pathname === navigator.pathname);

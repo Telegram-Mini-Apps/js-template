@@ -1,25 +1,22 @@
 import $ from 'jquery';
 import { classNames } from '@telegram-apps/sdk';
 
-import type { MaybeChild } from '@/types';
-import type { AppContext } from '@/context/types';
-
-import './styles.css';
 import { filterChildren } from '@/utils/filterChildren';
 
-export class Link {
-  private readonly el: JQuery<HTMLAnchorElement>;
+import './styles.css';
 
-  constructor(
-    { href, class: className }: { href: string; class?: string },
-    context: AppContext,
-  ) {
+export class Link {
+  /**
+   * @param {{ href: string, class?: string }} 
+   * @param {import('../../context/types').AppContext} context 
+   */
+  constructor({ href, class: className }, context) {
     const targetUrl = new URL(href, window.location.toString());
     const currentUrl = new URL(window.location.toString());
     const isExternal = targetUrl.protocol !== currentUrl.protocol
       || targetUrl.host !== currentUrl.host;
 
-    this.el = $<HTMLAnchorElement>('<a/>')
+    this.el = $('<a/>')
       .attr('class', classNames('link', className))
       .attr('href', isExternal ? href : context.navigator.renderPath(href));
 
@@ -31,12 +28,15 @@ export class Link {
     }
   }
 
-  appendChild(...children: MaybeChild[]): this {
+  appendChild(...children) {
     this.el.append(...filterChildren(children));
     return this;
   }
 
-  element(): HTMLAnchorElement {
+  /**
+   * @returns {HTMLAnchorElement}
+   */
+  element() {
     return this.el[0];
   }
 }

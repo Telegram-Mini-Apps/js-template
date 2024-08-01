@@ -1,20 +1,21 @@
 import { Page } from '@/components/Page/Page';
 import { Link } from '@/components/Link/Link';
-import { DisplayData, type DisplayDataRow } from '@/components/DisplayData/DisplayData';
+import { DisplayData } from '@/components/DisplayData/DisplayData';
 import { PageComponent } from '@/pages/PageComponent';
-import type { AppContext } from '@/context/types';
 
 export class ThemeParamsPage extends PageComponent {
-  private readonly dd: DisplayData;
-
-  constructor(private readonly context: AppContext) {
+  /**
+   * @param {import('../context/types').AppContext} context 
+   */
+  constructor(context) {
     super(new Page({ title: 'Theme Params' }));
+    this.context = context;
     this.dd = new DisplayData({ rows: this.computeRows() });
     this
       .page
       .setDisclaimer([
         'This page displays current ',
-        new Link({ href: 'https://docs.telegram-mini-apps.com/platform/theming' }, context)
+        new Link({ href: 'https://docs.telegram-mini-apps.com/platform/theming' }, this.context)
           .appendChild('theme parameters')
           .element(),
         '. It is reactive, so, changing theme externally will lead to this page updates.',
@@ -22,7 +23,7 @@ export class ThemeParamsPage extends PageComponent {
       .appendChild(this.dd.element());
   }
 
-  private computeRows(): DisplayDataRow[] {
+  computeRows() {
     return Object
       .entries(this.context.themeParams.getState())
       .map(([title, value]) => ({
@@ -33,7 +34,7 @@ export class ThemeParamsPage extends PageComponent {
       }));
   }
 
-  private onThemeChange = () => {
+  onThemeChange = () => {
     this.dd.setRows(this.computeRows());
   };
 
