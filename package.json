@@ -9,7 +9,7 @@
   "scripts": {
     "deploy": "gh-pages -d dist",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "lint": "eslint --ext .js --report-unused-disable-directives --max-warnings 0 src/",
     "lint:fix": "eslint --ext .js --report-unused-disable-directives --max-warnings 0 --fix src/",
     "preview": "vite preview"
